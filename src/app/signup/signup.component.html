@@ -13,9 +13,9 @@
         />
    
       </mat-form-field>
-
-      <!-- EMAIL -->
-      <mat-form-field>
+      <div class="emails" formGroupName="emails">
+<!-- EMAIL -->
+<mat-form-field>
         <input
           matInput
           placeholder="Email"
@@ -33,9 +33,13 @@
           formControlName ="emailRepeat"
           required
         />
+       
+
         <!-- <mat-error *ngIf="email.invalid">{{getErrorEmail()}}</mat-error> -->
       </mat-form-field>
-
+      </div>
+      
+      <div formGroupName="passwords">
       <!-- PASSWORD -->
       <div class="form-field">
         <mat-form-field>
@@ -71,10 +75,16 @@
           alt="lock"
           (click)="showRepeatPassword()"
         />
+
+          <!-- <mat-error *ngIf="myForm.hasError('notSame')">
+                Passwords do not match
+            </mat-error>   -->
       </div>
+</div>
 
-
-      <div formGroupName="personalData">
+ <hr>
+<!-- Si quiero dentro de mi objeto user (el formulario) otro objeto con info relacionada formGroupName  -->
+      <div class="personalData" formGroupName="personalData">
 
           <!-- REAL NAME -->
           <mat-form-field>
@@ -82,7 +92,7 @@
               matInput
               placeholder="Nombre real"
               formControlName ="name"
-              required
+          
             />
           </mat-form-field>
           <!-- GENDER  -->
@@ -113,7 +123,7 @@
               matInput
               placeholder="Ciudad"
               formControlName ="city"
-              required
+             
             />
           </mat-form-field>
       </div>
