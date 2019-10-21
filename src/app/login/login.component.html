@@ -1,0 +1,35 @@
+
+<div class="login-component">
+  <div class="logo-name">
+    <h1 >SonDeDe</h1>
+  </div>
+  
+  
+  <div class="form-container">
+    <form (ngSubmit)='datosForm(myForm)' #myForm='ngForm'>
+      <mat-form-field>
+           <input matInput placeholder="Usuario" name="usuario" [(ngModel)]="usuario">
+         </mat-form-field>
+ 
+         <mat-form-field>
+           <input matInput placeholder="Contraseña" name="contraseña" [(ngModel)]="contrasena">
+         </mat-form-field>
+ 
+         
+         <mat-checkbox class="checkbox" [(ngModel)]="checked" name="recordar-datos" >Recordar datos</mat-checkbox>
+
+         <button class="button" mat-raised-button >ENTRAR</button>
+
+<div class="acceder-invitado">
+  <p>Si no tienes cuenta y quieres probar la app, puedes entrar como invitado. </p>
+  <button class="button" mat-raised-button >INVITADO</button>
+</div>
+
+    </form>
+  </div>
+  <div class="footer">
+    
+    <a [routerLink]="['/signup']">Registrar</a>
+    <a href="">Cambiar Contraseña</a>
+  </div>
+</div>

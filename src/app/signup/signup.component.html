@@ -1,0 +1,128 @@
+<div class="signup-component">
+  <h1 class="signup-name">REGISTRO</h1>
+
+  <div class="form-container">
+    <form (ngSubmit)="onSubmit()" [formGroup]="user">
+      <!-- USER -->
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Username"
+          formControlName="username"
+          required
+        />
+   
+      </mat-form-field>
+
+      <!-- EMAIL -->
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Email"
+          formControlName="email"
+          required
+        />
+        <!-- <mat-error *ngIf="email.invalid">{{getErrorEmail()}}</mat-error> -->
+      </mat-form-field>
+
+      <!-- REPEAT EMAIL -->
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Repetir email"
+          formControlName ="emailRepeat"
+          required
+        />
+        <!-- <mat-error *ngIf="email.invalid">{{getErrorEmail()}}</mat-error> -->
+      </mat-form-field>
+
+      <!-- PASSWORD -->
+      <div class="form-field">
+        <mat-form-field>
+          <input
+            matInput
+            [type]="isLock"
+            placeholder="Contraseña"
+            formControlName ="password"
+            required
+          />
+        
+        </mat-form-field>
+        <img
+          [src]="theImg" alt="lock" 
+          alt="lock"
+          (click)="showPassword()"
+        />
+      </div>
+
+      <!-- REPEAT PASSWORD -->
+      <div class="form-field">
+        <mat-form-field>
+          <input
+            matInput
+            [type]="isLockRepeat"
+            placeholder="Repetir contraseña"
+            formControlName ="passwordRepeat"
+            required
+          />
+        </mat-form-field>
+        <img
+          [src]="theImgRepeat" alt="lock" 
+          alt="lock"
+          (click)="showRepeatPassword()"
+        />
+      </div>
+
+
+      <div formGroupName="personalData">
+
+          <!-- REAL NAME -->
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Nombre real"
+              formControlName ="name"
+              required
+            />
+          </mat-form-field>
+          <!-- GENDER  -->
+          <mat-form-field>
+            <mat-label>Género</mat-label>
+            <select formControlName ="gender" matNativeControl>
+              <option value="mujer">Mujer</option>
+              <option value="hombre">Hombre</option>
+            </select>
+          </mat-form-field>
+    
+          <!-- BIRTHDAY  -->
+    
+          <mat-form-field>
+            <input
+              formControlName ="birthday"
+              matInput
+              [matDatepicker]="picker"
+              placeholder="Fecha de nacimiento"
+            />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+    
+          <!-- CIUDAD -->
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Ciudad"
+              formControlName ="city"
+              required
+            />
+          </mat-form-field>
+      </div>
+
+      <!-- ENVIAR -->
+      <button class="button" mat-raised-button>Enviar</button>
+    </form>
+  </div>
+  <div class="footer">
+    <a [routerLink]="['/login']">Login</a>
+  </div>
+</div>
