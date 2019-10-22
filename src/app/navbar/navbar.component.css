@@ -1,0 +1,44 @@
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+mat-toolbar {
+    
+    display: grid;
+    grid-template-columns: 1fr 70% 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "menu title title title tvShare search";
+    background-color: #C0CFD8;
+    padding: 10px 0;
+   
+}
+
+li {
+    display: flex;
+    justify-content: center;
+}
+
+
+.menu {
+  grid-area: menu;
+
+}
+
+.title {
+  grid-area: title;
+  font-size: 1.2rem;
+
+}
+
+.tvShare {
+  grid-area: tvShare;
+  margin-right: 10px;
+
+}
+
+.search {
+  grid-area: search;
+  margin-right: 10px;
+ 
+} 

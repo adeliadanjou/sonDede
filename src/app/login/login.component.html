@@ -22,7 +22,7 @@
 
 <div class="acceder-invitado">
   <p>Si no tienes cuenta y quieres probar la app, puedes entrar como invitado. </p>
-  <button class="button" mat-raised-button >INVITADO</button>
+  <button [routerLink]="[ '/peliculas' ]" class="button" mat-raised-button >INVITADO</button>
 </div>
 
     </form>
@@ -30,6 +30,7 @@
   <div class="footer">
     
     <a [routerLink]="['/signup']">Registrar</a>
-    <a href="">Cambiar Contraseña</a>
+    <a href="#">Cambiar Contraseña</a>
   </div>
 </div>
+
