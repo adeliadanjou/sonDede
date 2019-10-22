@@ -1,12 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-  FormBuilder,
-  FormGroupName
-} from "@angular/forms";
+import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 
 @Component({
   selector: "app-signup",
@@ -25,17 +20,26 @@ export class SignupComponent implements OnInit {
   // 2) aqui llamo a formBuilder en el constructor
   // y luego lo uso para rellenar mi variable de arriba user con los datos del form
 
-  constructor(public formBuilder: FormBuilder) {
+  constructor(public formBuilder: FormBuilder, private router: Router) {
     this.user = this.formBuilder.group({
       username: ["", [Validators.required, Validators.minLength(2)]],
-      emails: this.formBuilder.group({
-        email: ["", [Validators.required, Validators.email]],
-        emailRepeat: ["", [Validators.required, Validators.email] ]
-      }, { validator: this.checkEmails}),
-      passwords: this.formBuilder.group({
-        password: [undefined, Validators.required],
-        passwordRepeat: [undefined, Validators.required]
-      }, { validator: this.checkPasswords}),
+
+      // como quiero agrupar el email y su confirmacion en un mismo sitio, creo un formBuilder.group
+      emails: this.formBuilder.group(
+        {
+          // como email tiene varios validadores, hay que meter las validaciones en un array :
+          email: ["", [Validators.required, Validators.email]],
+          emailRepeat: ["", [Validators.required, Validators.email]]
+        },
+        { validator: this.checkEmails }
+      ),
+      passwords: this.formBuilder.group(
+        {
+          password: [undefined, Validators.required],
+          passwordRepeat: [undefined, Validators.required]
+        },
+        { validator: this.checkPasswords }
+      ),
       personalData: this.formBuilder.group({
         name: [""],
         gender: [""],
@@ -47,22 +51,24 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {}
 
-checkPasswords(group: FormGroup){
- 
-   let pass = group.value.password;
-   let confirmPass = group.value.passwordRepeat
+  // FUNCIONES:
 
-  return pass === confirmPass ? null : { notSamePassword: true }
-}
+  // checkPasswords y checkEmails comprueban si los dos passwords/los dos emails introducidos son iguales
+  checkPasswords(group: FormGroup) {
+    let pass = group.value.password;
+    let confirmPass = group.value.passwordRepeat;
 
-checkEmails(group: FormGroup){
+    return pass === confirmPass ? null : { notSamePassword: true };
+  }
 
-  let pass = group.value.email;
-  let confirmPass = group.value.emailRepeat
+  checkEmails(group: FormGroup) {
+    let pass = group.value.email;
+    let confirmPass = group.value.emailRepeat;
 
- return pass === confirmPass ? null : { notSameEmail: true }
-}
+    return pass === confirmPass ? null : { notSameEmail: true };
+  }
 
+  // muestra u oculta la contraseña 
   showPassword() {
     if (this.isLock === "password") {
       this.isLock = "text";
@@ -71,7 +77,6 @@ checkEmails(group: FormGroup){
       this.isLock = "password";
       this.theImg = "../../assets/images/lock.svg";
     }
-   
   }
 
   showRepeatPassword() {
@@ -82,6 +87,16 @@ checkEmails(group: FormGroup){
       this.isLockRepeat = "text";
       this.theImgRepeat = "../../assets/images/unlock.svg";
     }
-   
+  }
+
+  // La chicha de nuestro form, aqui llega el formulario al completo y es donde guardariamos en base de datos. 
+  // Tambien le decimos que navege al login tras completarse el form.
+  // Falta comprobar que llegue bien y en ese caso guardar
+  
+  sendForm() {
+    // Aqui esta tu formulario:
+    console.log(this.user.value);
+    // Aqui tu redirect a login
+    this.router.navigate(["login"]);
   }
 }
