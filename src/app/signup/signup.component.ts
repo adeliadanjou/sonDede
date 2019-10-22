@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { ErrorStateMatcher } from "@angular/material/core";
+
 import {
   FormControl,
   FormGroup,
   Validators,
-  FormBuilder
+  FormBuilder,
+  FormGroupName
 } from "@angular/forms";
 
 @Component({
@@ -13,8 +14,8 @@ import {
   styleUrls: ["./signup.component.css"]
 })
 export class SignupComponent implements OnInit {
-  isLock: String = "text";
-  isLockRepeat: String = "text";
+  isLock: String = "password";
+  isLockRepeat: String = "password";
   theImg: String = "../../assets/images/lock.svg";
   theImgRepeat: String = "../../assets/images/lock.svg";
 
@@ -26,15 +27,15 @@ export class SignupComponent implements OnInit {
 
   constructor(public formBuilder: FormBuilder) {
     this.user = this.formBuilder.group({
-      username: ["", Validators.required, Validators.minLength(2)],
+      username: ["", [Validators.required, Validators.minLength(2)]],
       emails: this.formBuilder.group({
-        email: ["", Validators.required],
-        emailRepeat: ["", Validators.required]
-      }),
+        email: ["", [Validators.required, Validators.email]],
+        emailRepeat: ["", [Validators.required, Validators.email] ]
+      }, { validator: this.checkEmails}),
       passwords: this.formBuilder.group({
         password: [undefined, Validators.required],
         passwordRepeat: [undefined, Validators.required]
-      }),
+      }, { validator: this.checkPasswords}),
       personalData: this.formBuilder.group({
         name: [""],
         gender: [""],
@@ -46,25 +47,41 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {}
 
+checkPasswords(group: FormGroup){
+ 
+   let pass = group.value.password;
+   let confirmPass = group.value.passwordRepeat
 
+  return pass === confirmPass ? null : { notSamePassword: true }
+}
+
+checkEmails(group: FormGroup){
+
+  let pass = group.value.email;
+  let confirmPass = group.value.emailRepeat
+
+ return pass === confirmPass ? null : { notSameEmail: true }
+}
 
   showPassword() {
-    if (this.isLock === "text") {
-      this.isLock = "password";
+    if (this.isLock === "password") {
+      this.isLock = "text";
       this.theImg = "../../assets/images/unlock.svg";
     } else {
-      this.isLock = "text";
+      this.isLock = "password";
       this.theImg = "../../assets/images/lock.svg";
     }
+   
   }
 
   showRepeatPassword() {
     if (this.isLockRepeat === "text") {
       this.isLockRepeat = "password";
-      this.theImgRepeat = "../../assets/images/unlock.svg";
+      this.theImgRepeat = "../../assets/images/lock.svg";
     } else {
       this.isLockRepeat = "text";
-      this.theImgRepeat = "../../assets/images/lock.svg";
+      this.theImgRepeat = "../../assets/images/unlock.svg";
     }
+   
   }
 }

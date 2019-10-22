@@ -8,14 +8,51 @@ hr {
   border: 1px solid #BF214B;
 }
 
+.line-width {
+  min-width: 95%;
+}
 .form-field {
   display: flex;
   flex-direction: row;
-  align-items: baseline;
   justify-content: space-between;
+  align-items: center;
+  
 }
 
+.personal-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.3em;
+}
 
+.personal-info p {
+  color: #BF214B
+}
+.personal-info-avatar {
+width: 30px;
+height: 30px;
+margin: 15px;
+fill: rgb(216, 94, 94);
+}
+
+.error {
+  border: 1px solid red;
+  max-width: 200px;
+  text-align:center;
+  background-color: red;
+  color: white;
+  border-radius: 3px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  font-size: 0.9rem;
+}
+
+.passwords {
+  display: flex;
+  flex-direction: column;
+}
 
 .signup-component {
   height: 100vh;
@@ -133,5 +170,13 @@ a {
     flex-direction: row;
     justify-content: center;
     margin-top: -40px;
+  }
+
+  .error {
+  
+    max-width: 300px;
+    margin-left: 70px;
+
+   
   }
 }

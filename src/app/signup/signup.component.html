@@ -11,121 +11,124 @@
           formControlName="username"
           required
         />
-   
       </mat-form-field>
       <div class="emails" formGroupName="emails">
-<!-- EMAIL -->
-<mat-form-field>
-        <input
-          matInput
-          placeholder="Email"
-          formControlName="email"
-          required
-        />
-        <!-- <mat-error *ngIf="email.invalid">{{getErrorEmail()}}</mat-error> -->
-      </mat-form-field>
+        <!-- EMAIL -->
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Email"
+            formControlName="email"
+            required
+          />
+          <mat-error *ngIf="user.controls.emails.controls.email.hasError('email')">Por favor introduce un email correcto</mat-error>
+        </mat-form-field>
 
-      <!-- REPEAT EMAIL -->
-      <mat-form-field>
-        <input
-          matInput
-          placeholder="Repetir email"
-          formControlName ="emailRepeat"
-          required
-        />
-       
+        <!-- REPEAT EMAIL -->
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Repetir email"
+            formControlName="emailRepeat"
+            required
+          />
+  
+          <mat-error *ngIf="user.controls.emails.controls.emailRepeat.hasError('email')">Por favor introduce un email correcto</mat-error>
+        </mat-form-field>
 
-        <!-- <mat-error *ngIf="email.invalid">{{getErrorEmail()}}</mat-error> -->
-      </mat-form-field>
-      </div>
+        <mat-error
       
-      <div formGroupName="passwords">
-      <!-- PASSWORD -->
-      <div class="form-field">
-        <mat-form-field>
-          <input
-            matInput
-            [type]="isLock"
-            placeholder="Contraseña"
-            formControlName ="password"
-            required
-          />
-        
-        </mat-form-field>
-        <img
-          [src]="theImg" alt="lock" 
-          alt="lock"
-          (click)="showPassword()"
-        />
+        *ngIf="user.hasError('notSameEmail', 'emails') &&
+        this.user.controls.emails.controls.emailRepeat.touched"
+      >
+        Los emails no coinciden
+      </mat-error>
+
+
       </div>
 
-      <!-- REPEAT PASSWORD -->
-      <div class="form-field">
-        <mat-form-field>
-          <input
-            matInput
-            [type]="isLockRepeat"
-            placeholder="Repetir contraseña"
-            formControlName ="passwordRepeat"
-            required
-          />
-        </mat-form-field>
-        <img
-          [src]="theImgRepeat" alt="lock" 
-          alt="lock"
-          (click)="showRepeatPassword()"
-        />
+      <div class="passwords" formGroupName="passwords">
+        <!-- PASSWORD -->
+        <div class="form-field">
+          <mat-form-field class="line-width">
+            <input
+              matInput
+              [type]="isLock"
+              placeholder="Contraseña"
+              formControlName="password"
+              required
+            />
+          </mat-form-field>
+          <img [src]="theImg" alt="lock" (click)="showPassword()" />
+        </div>
 
-          <!-- <mat-error *ngIf="myForm.hasError('notSame')">
-                Passwords do not match
-            </mat-error>   -->
+        <!-- REPEAT PASSWORD -->
+        <div class="form-field">
+          <mat-form-field class="line-width">
+            <input
+              matInput
+              [type]="isLockRepeat"
+              placeholder="Repetir contraseña"
+              formControlName="passwordRepeat"
+              required
+            />
+          </mat-form-field>
+          <img [src]="theImgRepeat" alt="lock" (click)="showRepeatPassword()" />
+        </div>
+        <mat-error
+      
+          *ngIf="
+            user.hasError('notSamePassword', 'passwords') &&
+            this.user.controls.passwords.controls.passwordRepeat.touched
+          "
+        >
+          Las contraseñas no coinciden
+        </mat-error>
       </div>
-</div>
+      <div class="personal-info">
+        <img
+          class="personal-info-avatar"
+          src="../../assets/images/avatar.svg"
+          alt=""
+        />
+        <p>{{ "Información Perfil" | uppercase }}</p>
+      </div>
 
- <hr>
-<!-- Si quiero dentro de mi objeto user (el formulario) otro objeto con info relacionada formGroupName  -->
+      <!-- Si quiero dentro de mi objeto user (el formulario) otro objeto con info relacionada formGroupName  -->
       <div class="personalData" formGroupName="personalData">
+        <!-- REAL NAME -->
+        <mat-form-field>
+          <input matInput placeholder="Nombre real" formControlName="name" />
+        </mat-form-field>
+        <!-- GENDER  -->
+        <mat-form-field>
+          <mat-label>Género</mat-label>
+          <select formControlName="gender" matNativeControl>
+            <option value="mujer">Mujer</option>
+            <option value="hombre">Hombre</option>
+          </select>
+        </mat-form-field>
 
-          <!-- REAL NAME -->
-          <mat-form-field>
-            <input
-              matInput
-              placeholder="Nombre real"
-              formControlName ="name"
-          
-            />
-          </mat-form-field>
-          <!-- GENDER  -->
-          <mat-form-field>
-            <mat-label>Género</mat-label>
-            <select formControlName ="gender" matNativeControl>
-              <option value="mujer">Mujer</option>
-              <option value="hombre">Hombre</option>
-            </select>
-          </mat-form-field>
-    
-          <!-- BIRTHDAY  -->
-    
-          <mat-form-field>
-            <input
-              formControlName ="birthday"
-              matInput
-              [matDatepicker]="picker"
-              placeholder="Fecha de nacimiento"
-            />
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-    
-          <!-- CIUDAD -->
-          <mat-form-field>
-            <input
-              matInput
-              placeholder="Ciudad"
-              formControlName ="city"
-             
-            />
-          </mat-form-field>
+        <!-- BIRTHDAY  -->
+
+        <mat-form-field>
+          <input
+            formControlName="birthday"
+            matInput
+            [matDatepicker]="picker"
+            placeholder="Fecha de nacimiento"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <!-- CIUDAD -->
+        <mat-form-field>
+          <input matInput placeholder="Ciudad" formControlName="city" />
+        </mat-form-field>
       </div>
 
       <!-- ENVIAR -->
