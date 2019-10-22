@@ -9,9 +9,13 @@ import { Component, OnInit, Input } from '@angular/core';
 export class NavbarComponent implements OnInit {
   @Input() title: String 
 
+  isSearch: boolean = false;
+
   constructor() {}
  
- 
+ activateSearch(){
+   this.isSearch = !this.isSearch
+ }
 
  
   ngOnInit() {

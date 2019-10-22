@@ -29,21 +29,31 @@
           <mat-icon>menu</mat-icon>
         </button>
       </div>
-      <li><p class="title">{{title}}</p></li>
-      <li>
-        <img
-          class="tvShare icon"
-          src="../../assets/images/screen.svg"
-          alt="tvIcon"
+
+      <p *ngIf="isSearch === false " class="title">{{title}}</p>
+      
+      <img *ngIf="isSearch === false"
+      class="tvShare icon"
+      src="../../assets/images/screen.svg"
+      alt="tvIcon"
+      />
+
+      <div *ngIf="isSearch === true" class="title searchDiv" >
+        <img 
+        class="tvShare icon marginIcon"
+        src="../../assets/images/screen.svg"
+        alt="tvIcon"
         />
-      </li>
-      <li>
+        <input   class=" searchBox" type="text" placeholder="¿Qué estás buscando?">
+      </div>
+
         <img
           class="search icon"
           src="../../assets/images/search.svg"
           alt="search"
+          (click)="activateSearch()"
         />
-      </li>
+      
     </mat-toolbar>
   </mat-sidenav-content>
 </mat-sidenav-container>

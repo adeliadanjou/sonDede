@@ -1,27 +1,12 @@
 # SonDede
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.9.
+ - USAR INPUT (PADRE ---> HIJO) -
 
-## Development server
+1) En el hijo hay que poner el decorador @Input() y la propiedad que queremos recibir del padre
+ #                               @Input() title: any;
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+2) En el ts del padre creamos la propiedad en cuestión titlePadre: String ="Soy el padre";
 
-## Code scaffolding
+3) En el html del padre, en la etiqueta del hijo <hijo [title]= "titlePadre"></hijo>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+4) En el html del hijo llamamos a su propiedad donde pusimos el input.
