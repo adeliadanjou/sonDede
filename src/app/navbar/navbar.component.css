@@ -9,9 +9,22 @@ mat-toolbar {
     grid-template-columns: 1fr 60% 1fr 1fr;
     grid-template-rows: 1fr;
     grid-template-areas: "menu title title title tvShare search";
-    background-color: #C0CFD8;
+    background-color: #95CC29;
     padding: 10px 0;
    
+}
+
+mat-icon {
+  margin-right: 10px;
+}
+.sidenav{
+  background-color: #95CC29;
+}
+
+.nav-list-a {
+  color: #222222;
+  font-size: 1.1rem;
+ 
 }
 
 li {
@@ -45,7 +58,7 @@ li {
 } 
 
 .searchBox {
-  background-color:rgb(192, 207, 216)  ;
+  background-color:#95CC29  ;
   border: none;
   color: white !important;
   padding: 5px;
