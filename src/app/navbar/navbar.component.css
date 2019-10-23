@@ -27,9 +27,19 @@ mat-icon {
  
 }
 
+ul {
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+ 
+}
+
 li {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+  
 }
 
 

@@ -7,6 +7,10 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
+  isFilmClicked: boolean = false;
+  isSeriesClicked: boolean = false;
+
   @Input() title: String 
 
   isSearch: boolean = false;
@@ -17,7 +21,13 @@ export class NavbarComponent implements OnInit {
    this.isSearch = !this.isSearch
  }
 
- 
+ filmClick(){
+   this.isFilmClicked = !this.isFilmClicked;
+ }
+
+ seriesClick(){
+  this.isSeriesClicked = !this.isSeriesClicked;
+}
   ngOnInit() {
   }
 

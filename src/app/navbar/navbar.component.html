@@ -1,60 +1,96 @@
-<!-- <ul>
-    <li><img class="menu icon" src="../../assets/images/menu.svg" alt="menu" /></li>
-    <li><p class="title">Titulo: Peliculas</p></li>
-    <li><img class="tvShare icon" src="../../assets/images/screen.svg" alt="tvIcon" /></li>
-    <li> <img class="search icon" src="../../assets/images/search.svg" alt="search" /></li>
-</ul> 
- -->
-
 <mat-sidenav-container>
-    <!-- // MAT-SIDENAV: Barra navegación de la izquierda con el toogle -->
-        <mat-sidenav #drawer class="sidenav" fixedInViewport
-        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-        [mode]="(isHandset$ | async) ? 'over' : 'side'"
-        [opened]="(isHandset$ | async) === false">
-      <mat-toolbar>Menu</mat-toolbar>
-      <mat-nav-list>
-        <a class="nav-list-a" mat-list-item [routerLink]="['/peliculas']"><mat-icon>local_movies</mat-icon>Películas</a>
-        <a class="nav-list-a" mat-list-item [routerLink]="['/series']"><mat-icon>live_tv</mat-icon>Series</a>
-        <a class="nav-list-a" mat-list-item [routerLink]="['/favoritas']"><mat-icon>favorite</mat-icon>Favoritas</a>
-        <a class="nav-list-a" mat-list-item href="#"> <mat-icon>exit_to_app</mat-icon>Cerrar sesión</a>
-      </mat-nav-list>
-    </mat-sidenav>
+  <!-- // MAT-SIDENAV: Barra navegación de la izquierda con el toogle -->
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a (click)="filmClick()" mat-list-item
+        ><mat-icon>local_movies</mat-icon>Películas</a
+      >
 
-    <!-- // MAT-SIDENAV-CONTENT: Botones de barra navegacion de siempre -->
+      <ul *ngIf="isFilmClicked">
+        <li>
+          <a [routerLink]="['/peliculas/populares']">
+            <mat-icon>whatshot</mat-icon>
+            Populares
+          </a>
+        </li>
+        <li>
+          <a [routerLink]="['/peliculas/mejores']">
+            <mat-icon>star</mat-icon>Mejores</a
+          >
+        </li>
+        <li>
+          <a [routerLink]="['/peliculas/guardadas']"
+            ><mat-icon>favorite_border</mat-icon>Guardadas</a
+          >
+        </li>
+      </ul>
+
+      <a (click)="seriesClick()" mat-list-item
+        ><mat-icon>live_tv</mat-icon>Series</a
+      >
+
+      <ul *ngIf="isSeriesClicked">
+        <li><mat-icon>whatshot</mat-icon><a [routerLink]="">Populares</a></li>
+        <li>
+          <mat-icon>star</mat-icon>
+          <a [routerLink]="['/seriess/mejores']">Mejores</a>
+        </li>
+        <li><mat-icon>favorite_border</mat-icon>Guardadas</li>
+      </ul>
+
+      <a mat-list-item><mat-icon>favorite</mat-icon>Favoritas</a>
+      <a mat-list-item href="#">
+        <mat-icon>exit_to_app</mat-icon>Cerrar sesión</a
+      >
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- // MAT-SIDENAV-CONTENT: Botones de barra navegacion de siempre -->
   <mat-sidenav-content>
     <!--in here all the content must reside. We will add a navigation header as well-->
     <mat-toolbar>
       <div>
-        <button class="menu" mat-icon-button  (click)="drawer.toggle()">
+        <button class="menu" mat-icon-button (click)="drawer.toggle()">
           <mat-icon>menu</mat-icon>
         </button>
       </div>
 
-      <p *ngIf="isSearch === false " class="title">{{title}}</p>
-      
-      <img *ngIf="isSearch === false"
-      class="tvShare icon"
-      src="../../assets/images/screen.svg"
-      alt="tvIcon"
-      />
+      <p *ngIf="isSearch === false" class="title">{{ title }}</p>
 
-      <div *ngIf="isSearch === true" class="title searchDiv" >
-        <img 
-        class="tvShare icon marginIcon"
+      <img
+        *ngIf="isSearch === false"
+        class="tvShare icon"
         src="../../assets/images/screen.svg"
         alt="tvIcon"
+      />
+
+      <div *ngIf="isSearch === true" class="title searchDiv">
+        <img
+          class="tvShare icon marginIcon"
+          src="../../assets/images/screen.svg"
+          alt="tvIcon"
         />
-        <input   class=" searchBox" type="text" placeholder="¿Qué estás buscando?">
+        <input
+          class=" searchBox"
+          type="text"
+          placeholder="¿Qué estás buscando?"
+        />
       </div>
 
-        <img
-          class="search icon"
-          src="../../assets/images/search.svg"
-          alt="search"
-          (click)="activateSearch()"
-        />
-      
+      <img
+        class="search icon"
+        src="../../assets/images/search.svg"
+        alt="search"
+        (click)="activateSearch()"
+      />
     </mat-toolbar>
   </mat-sidenav-content>
 </mat-sidenav-container>
